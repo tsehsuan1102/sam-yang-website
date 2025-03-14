@@ -120,7 +120,7 @@ const Header: React.FC<HeaderProps> = ({ darkMode, toggleDarkMode }) => {
               aria-label="github profile"
               edge="end"
               component="a"
-              href="https://github.com/yourusername"
+              href="https://github.com/tsehsuan1102"
               target="_blank"
               rel="noopener noreferrer"
               sx={{ mr: 1 }}
@@ -132,7 +132,7 @@ const Header: React.FC<HeaderProps> = ({ darkMode, toggleDarkMode }) => {
               aria-label="linkedin profile"
               edge="end"
               component="a"
-              href="https://linkedin.com/in/yourprofile"
+              href="https://www.linkedin.com/in/tse-hsuan-yang/"
               target="_blank"
               rel="noopener noreferrer"
             >
