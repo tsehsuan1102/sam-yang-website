@@ -3,6 +3,7 @@ import { Box, CssBaseline, ThemeProvider, createTheme } from '@mui/material';
 import Header from './Header';
 import Footer from './Footer';
 import customTheme from '../utils/theme';
+import AnimatedBackground from '@/components/AnimatedBackground';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -69,10 +70,12 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           minHeight: '100vh',
           bgcolor: 'background.default',
           color: 'text.primary',
+          position: 'relative',
         }}
       >
+        <AnimatedBackground />
         <Header darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
-        <Box component="main" sx={{ flexGrow: 1, py: 8 }}>
+        <Box component="main" sx={{ flexGrow: 1, py: 8, position: 'relative', zIndex: 1 }}>
           {children}
         </Box>
         <Footer />

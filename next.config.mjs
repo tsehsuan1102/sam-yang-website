@@ -23,7 +23,7 @@ const nextConfig = {
   },
   // 禁用 App Router，使用 Pages Router
   useFileSystemPublicRoutes: true,
-  appDir: false,
+  // appDir: false,
 };
 
 mergeConfig(nextConfig, userConfig);
