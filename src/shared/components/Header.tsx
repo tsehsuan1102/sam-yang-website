@@ -25,7 +25,7 @@ interface NavLink {
 const navLinks: NavLink[] = [
   { label: 'Home', path: '/' },
   { label: 'About', path: '/about' },
-  { label: 'Projects', path: '/projects' },
+  // { label: 'Projects', path: '/projects' },
   { label: 'Contact', path: '/contact' }
 ];
 

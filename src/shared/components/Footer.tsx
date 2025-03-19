@@ -96,7 +96,7 @@ const Footer: React.FC = () => {
         <Divider sx={{ my: 3 }} />
         
         <Typography variant="body2" color="text.secondary" align="center">
-          © {currentYear} Your Name. All rights reserved.
+          © {currentYear} Tse-Hsuan Yang. All rights reserved.
         </Typography>
       </Container>
     </Box>
