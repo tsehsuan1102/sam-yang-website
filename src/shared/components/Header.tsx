@@ -107,7 +107,7 @@ const Header: React.FC<HeaderProps> = ({ darkMode, toggleDarkMode }) => {
 
           {/* Social Links & Theme Toggle */}
           <Box sx={{ display: 'flex', alignItems: 'center', ml: 2 }}>
-            <IconButton
+            {/* <IconButton
               color="inherit"
               aria-label="toggle theme"
               edge="end"
@@ -115,7 +115,7 @@ const Header: React.FC<HeaderProps> = ({ darkMode, toggleDarkMode }) => {
               sx={{ mr: 1 }}
             >
               {darkMode ? <Brightness7 /> : <Brightness4 />}
-            </IconButton>
+            </IconButton> */}
             <IconButton
               color="inherit"
               aria-label="github profile"

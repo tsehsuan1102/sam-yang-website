@@ -78,7 +78,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         <Box component="main" sx={{ flexGrow: 1, py: 8, position: 'relative', zIndex: 1 }}>
           {children}
         </Box>
-        <Footer />
+        {/* <Footer /> */}
       </Box>
     </ThemeProvider>
   );
