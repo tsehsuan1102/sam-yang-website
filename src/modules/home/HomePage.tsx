@@ -21,11 +21,12 @@ import TimelineSeparator from '@mui/lab/TimelineSeparator';
 import TimelineConnector from '@mui/lab/TimelineConnector';
 import TimelineContent from '@mui/lab/TimelineContent';
 import TimelineDot from '@mui/lab/TimelineDot';
-import { ArrowForward, GitHub, Language, School, Work, Code, Article } from '@mui/icons-material';
+import { ArrowForward, GitHub, Language, School, Work, Code, Article, ChildCare, Computer, Psychology, CameraAlt, RocketLaunch, Flight, Explore } from '@mui/icons-material';
 import Link from 'next/link';
 import { profileService } from '../../shared/services/profile.service';
 import { projectsService } from '../../shared/services/projects.service';
 import { motion } from 'framer-motion';
+import { alpha } from '@mui/material/styles';
 
 // 控制是否顯示專案相關功能
 const SHOW_FULL_PROJECTS = false;
@@ -39,22 +40,60 @@ const HomePage: React.FC = () => {
 
   const achievements = [
     {
-      title: "EMNLP Conference Presentation",
-      description: "Presented research findings at EMNLP Conference in Dominican Republic",
-      icon: <Article />,
-      year: "2021"
+      title: "A Star is Born! 👶",
+      description: "Began my journey in Taiwan during the autumn of 1998. A curious mind with endless possibilities, ready to make a positive impact on the world.",
+      icon: <ChildCare />,
+      year: "1998 NOV",
+      bgColor: "rgba(25, 118, 210, 0.05)"
     },
     {
-      title: "Natural Language Processing Research",
-      description: "Published three papers during undergraduate studies",
+      title: "Baby Coder Adventures 🌱",
+      description: "Discovered the world of programming through Scratch. What started as a simple game project sparked a lifelong passion for software development.",
+      icon: <Computer />,
+      year: "2012 SEP",
+      bgColor: "rgba(25, 118, 210, 0.05)"
+    },
+    {
+      title: "University Quest: NTU Edition 🎓",
+      description: "Immersed in NTU's challenging Computer Science environment, surrounded by brilliant minds. Discovered the vast landscape of CS - from systems to AI. An eye-opening journey into technology's endless possibilities.",
       icon: <School />,
-      year: "2020-2021"
+      year: "2017 SEP",
+      bgColor: "rgba(25, 118, 210, 0.05)"
     },
     {
-      title: "International Career Move",
-      description: "Relocated to Tokyo, Japan to join BeyondBrain",
+      title: "First Tech Adventure ✨",
+      description: "Initiated my professional journey through an internship. Each challenge became a stepping stone, shaping my understanding of software architecture and development practices.",
+      icon: <Psychology />,
+      year: "2020 JUL",
+      bgColor: "rgba(25, 118, 210, 0.05)"
+    },
+    {
+      title: "MixerBox Super Mission 🚀",
+      description: "Advanced to Full-Stack Development at MixerBox. Transformed technical expertise into tangible user value.",
       icon: <Work />,
-      year: "2024"
+      year: "2021 JUN",
+      bgColor: "rgba(25, 118, 210, 0.05)"
+    },
+    {
+      title: "AI Adventure Master 🤖",
+      description: "Appointed as Head of AI at BeyondBrain. Combining technical leadership with team development, driving innovation in artificial intelligence solutions.",
+      icon: <RocketLaunch />,
+      year: "2024 MAR",
+      bgColor: "rgba(25, 118, 210, 0.05)"
+    },
+    {
+      title: "Tokyo Tales Begin 🗼",
+      description: "Embraced a new chapter in Tokyo. Building international connections while contributing to cutting-edge technology development.",
+      icon: <Flight />,
+      year: "2024 SEP",
+      bgColor: "rgba(25, 118, 210, 0.05)"
+    },
+    {
+      title: "The Next Chapter ⭐",
+      description: "Excited to explore endless possibilities at the intersection of technology and human experience. From AI innovations to cultural bridges, from startup ecosystems to social impact - ready to embrace new challenges and create meaningful changes across borders.",
+      icon: <Explore />,
+      year: "Future",
+      bgColor: "rgba(25, 118, 210, 0.05)"
     }
   ];
 
@@ -138,45 +177,148 @@ const HomePage: React.FC = () => {
 
       {/* Key Achievements Section */}
       <Box sx={{ my: 8 }}>
-        <Typography variant="h4" component="h2" gutterBottom textAlign="center">
-          Key Achievements
+        <Typography 
+          variant="h4" 
+          component="h2" 
+          gutterBottom 
+          textAlign="center"
+          sx={{
+            color: 'primary.main',
+            fontWeight: 'bold'
+          }}
+        >
+          My Journey So Far
         </Typography>
         <Divider sx={{ mb: 4 }} />
-        <Timeline position="alternate">
+        <Timeline 
+          position="alternate" 
+          sx={{ 
+            [`& .MuiTimelineItem-root`]: {
+              minHeight: '120px'
+            },
+            [`& .MuiTimelineContent-root`]: {
+              py: 1
+            }
+          }}
+        >
           {achievements.map((achievement, index) => (
             <TimelineItem key={index}>
               <TimelineSeparator>
-                <TimelineDot color="primary">
-                  {achievement.icon}
-                </TimelineDot>
-                {index < achievements.length - 1 && <TimelineConnector />}
-              </TimelineSeparator>
-              <TimelineContent>
-                <Card 
-                  component={motion.div}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.2 }}
-                  viewport={{ once: true }}
+                <TimelineDot 
                   sx={{ 
-                    '&:hover': {
-                      transform: 'translateY(-8px)',
-                      transition: 'transform 0.3s ease-in-out'
-                    }
+                    background: '#d4eef1ff',
+                    border: '2px solid',
+                    borderColor: 'primary.main',
+                    p: 0.8
                   }}
                 >
-                  <CardContent>
-                    <Typography variant="h6" component="h3">
-                      {achievement.title}
-                    </Typography>
-                    <Typography variant="caption" color="text.secondary" display="block" gutterBottom>
-                      {achievement.year}
-                    </Typography>
-                    <Typography variant="body2">
-                      {achievement.description}
-                    </Typography>
-                  </CardContent>
-                </Card>
+                  {React.cloneElement(achievement.icon, { 
+                    sx: { fontSize: 20, color: 'primary.main' } 
+                  })}
+                </TimelineDot>
+                {index < achievements.length - 1 && (
+                  <TimelineConnector sx={{ 
+                    bgcolor: 'primary.main',
+                    width: '2px'
+                  }} />
+                )}
+              </TimelineSeparator>
+              <TimelineContent>
+                <Box
+                  component={motion.div}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ 
+                    opacity: 1, 
+                    y: 0,
+                    scale: 1,
+                    transition: { duration: 0.3 }
+                  }}
+                  whileHover={{ 
+                    scale: 1.05,
+                    rotateZ: index % 2 === 0 ? 1 : -1,
+                    transition: { 
+                      type: "spring",
+                      stiffness: 300,
+                      damping: 15
+                    }
+                  }}
+                  viewport={{ 
+                    once: true,
+                    margin: "-100px"
+                  }}
+                  sx={{
+                    transform: 'scale(0.95)',
+                    transformOrigin: index % 2 === 0 ? 'left' : 'right'
+                  }}
+                >
+                  <Card
+                    sx={{ 
+                      background: achievement.bgColor,
+                      borderRadius: 2,
+                      border: '1px solid',
+                      borderColor: 'primary.main',
+                      borderOpacity: 0.1,
+                      boxShadow: 1,
+                      transition: 'all 0.3s ease-in-out',
+                      '&:hover': {
+                        background: theme => `linear-gradient(135deg, ${alpha(theme.palette.primary.main, 0.08)} 0%, ${alpha(theme.palette.primary.main, 0.03)} 100%)`,
+                        boxShadow: theme => `
+                          0 10px 20px ${alpha(theme.palette.primary.main, 0.15)},
+                          0 0 0 1px ${alpha(theme.palette.primary.main, 0.1)},
+                          0 0 0 4px ${alpha(theme.palette.primary.main, 0.05)}
+                        `,
+                        transform: 'translateY(-2px)',
+                        '& .MuiTypography-subtitle1': {
+                          color: 'primary.dark'
+                        }
+                      }
+                    }}
+                  >
+                    <CardContent sx={{ p: 2 }}>
+                      <Typography 
+                        variant="subtitle1"
+                        component="h3" 
+                        sx={{ 
+                          fontWeight: 'bold',
+                          color: 'primary.main',
+                          mb: 0.5,
+                          transition: 'color 0.3s ease'
+                        }}
+                      >
+                        {achievement.title}
+                      </Typography>
+                      <Typography 
+                        variant="caption" 
+                        sx={{
+                          display: 'inline-block',
+                          background: theme => alpha(theme.palette.primary.main, 0.1),
+                          padding: '2px 8px',
+                          borderRadius: '12px',
+                          color: 'primary.main',
+                          mb: 1,
+                          fontSize: '0.7rem',
+                          transition: 'all 0.3s ease',
+                          '&:hover': {
+                            background: theme => alpha(theme.palette.primary.main, 0.15),
+                            transform: 'scale(1.05)'
+                          }
+                        }}
+                      >
+                        {achievement.year}
+                      </Typography>
+                      <Typography 
+                        variant="body2"
+                        sx={{
+                          color: 'text.primary',
+                          lineHeight: 1.4,
+                          fontSize: '0.85rem'
+                        }}
+                      >
+                        {achievement.description}
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                </Box>
               </TimelineContent>
             </TimelineItem>
           ))}
