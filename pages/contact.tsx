@@ -1,46 +1,45 @@
-import React from 'react';
-import Head from 'next/head';
 import Layout from '@/src/shared/components/Layout';
+import { profileService } from "@/src/shared/services/profile.service";
+import { Email, LocationOn, Phone } from "@mui/icons-material";
 import { 
-  Container, 
-  Typography, 
   Box, 
-  Grid, 
-  Card,
-  CardContent,
+  Card, 
+  CardContent, 
+  Container, 
   Divider,
-} from '@mui/material';
-import { Email, LocationOn, Phone } from '@mui/icons-material';
-import { profileService } from '@/src/shared/services/profile.service';
+  Grid,
+  Typography,
+} from "@mui/material";
+import Head from 'next/head';
+import React from 'react';
 
 export default function Contact() {
   const profile = profileService.getProfile();
-  
   return (
     <Layout>
       <Head>
         <title>Sam Yang | Contact</title>
-        <meta name="description" content="Contact information for Sam Yang, a software engineer based in Tokyo with a passion for technology and cross-cultural experiences." />
+        <meta content="Contact information for Sam Yang, a software engineer based in Tokyo with a passion for technology and cross-cultural experiences." name="description" />
       </Head>
       <Container maxWidth="lg">
         <Box sx={{ my: 4 }}>
-          <Typography variant="h3" component="h1" gutterBottom textAlign="center">
+          <Typography component="h1" gutterBottom textAlign="center" variant="h3">
             Contact Me
           </Typography>
-          <Typography variant="subtitle1" color="text.secondary" paragraph textAlign="center">
+          <Typography color="text.secondary" paragraph textAlign="center" variant="subtitle1">
             Feel free to reach out to me for collaborations or inquiries
           </Typography>
           <Divider sx={{ my: 4 }} />
           
-          <Grid container spacing={6} justifyContent="center">
+          <Grid container justifyContent="center" spacing={6}>
             {/* 联系方式 */}
-            <Grid item xs={12} md={6}>
+            <Grid item md={6} xs={12}>
               <Card>
                 <CardContent>
-                  <Typography variant="h5" gutterBottom>
+                  <Typography gutterBottom variant="h5">
                     Contact Information
                   </Typography>
-                  <Typography variant="body2" color="text.secondary" paragraph>
+                  <Typography color="text.secondary" paragraph variant="body2">
                     Here's how you can reach me
                   </Typography>
                   
@@ -54,18 +53,18 @@ export default function Contact() {
                   {profile.contact.linkedin && (
                     <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
                       <Box 
+                        alt="LinkedIn" 
                         component="img" 
                         src="/linkedin-icon.png" 
-                        alt="LinkedIn" 
                         sx={{ width: 24, height: 24, mr: 2 }} 
                       />
                       <Typography variant="body1">
                         <Box 
                           component="a" 
                           href={profile.contact.linkedin}
-                          target="_blank"
                           rel="noopener noreferrer"
                           sx={{ color: 'text.primary', textDecoration: 'none' }}
+                          target="_blank"
                         >
                           LinkedIn Profile
                         </Box>
@@ -76,18 +75,18 @@ export default function Contact() {
                   {profile.contact.github && (
                     <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
                       <Box 
+                        alt="GitHub" 
                         component="img" 
                         src="/github-icon.png" 
-                        alt="GitHub" 
                         sx={{ width: 24, height: 24, mr: 2 }} 
                       />
                       <Typography variant="body1">
                         <Box 
                           component="a" 
                           href={profile.contact.github}
-                          target="_blank"
                           rel="noopener noreferrer"
                           sx={{ color: 'text.primary', textDecoration: 'none' }}
+                          target="_blank"
                         >
                           GitHub Profile
                         </Box>

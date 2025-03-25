@@ -1,12 +1,12 @@
-import { Html, Head, Main, NextScript } from 'next/document'
+import { Head, Html, Main, NextScript } from 'next/document'
 
 export default function Document() {
   return (
     <Html lang="en">
           <Head>
               <title>Sam Yang | Software Engineer</title>
-              <meta name="description" content="Sam Yang - Software Engineer based in Tokyo, specializing in AI and full-stack development." />
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+              <meta content="Sam Yang - Software Engineer based in Tokyo, specializing in AI and full-stack development." name="description" />
+        <link href="/favicon.svg" rel="icon" type="image/svg+xml" />
       </Head>
       <body>
         <Main />

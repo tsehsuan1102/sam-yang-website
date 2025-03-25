@@ -1,23 +1,23 @@
-import React, { useState } from 'react';
 import Layout from '@/src/shared/components/Layout';
+import { projectsService } from '@/src/shared/services/projects.service';
+import { GitHub, Language, Search } from '@mui/icons-material';
 import { 
-  Container, 
-  Typography, 
-  Grid, 
+  Box, 
+  Button, 
   Card, 
   CardContent, 
   CardMedia, 
   Chip, 
-  Box, 
-  Button, 
-  TextField,
+  Container, 
+  Divider, 
+  Grid, 
   InputAdornment,
-  Divider,
-  Stack
+  Stack,
+  TextField,
+  Typography
 } from '@mui/material';
-import { GitHub, Language, Search } from '@mui/icons-material';
 import Link from 'next/link';
-import { projectsService } from '@/src/shared/services/projects.service';
+import React, { useState } from 'react';
 
 export default function Projects() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -32,10 +32,10 @@ export default function Projects() {
     <Layout>
       <Container maxWidth="lg">
         <Box sx={{ my: 4 }}>
-          <Typography variant="h3" component="h1" gutterBottom textAlign="center">
+          <Typography component="h1" gutterBottom textAlign="center" variant="h3">
             My Projects
           </Typography>
-          <Typography variant="subtitle1" color="text.secondary" paragraph textAlign="center">
+          <Typography color="text.secondary" paragraph textAlign="center" variant="subtitle1">
             A collection of projects I've worked on
           </Typography>
           <Divider sx={{ my: 4 }} />
@@ -44,9 +44,6 @@ export default function Projects() {
           <Box sx={{ maxWidth: 500, mx: 'auto', mb: 6 }}>
             <TextField
               fullWidth
-              placeholder="Search projects by name, description or technology..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
@@ -54,6 +51,9 @@ export default function Projects() {
                   </InputAdornment>
                 ),
               }}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Search projects by name, description or technology..."
+              value={searchQuery}
               variant="outlined"
             />
           </Box>
@@ -62,19 +62,19 @@ export default function Projects() {
           {filteredProjects.length > 0 ? (
             <Grid container spacing={4}>
               {filteredProjects.map((project) => (
-                <Grid item key={project.id} xs={12} md={6} lg={4}>
+                <Grid item key={project.id} lg={4} md={6} xs={12}>
                   <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
                     <CardMedia
+                      alt={project.title}
                       component="img"
                       height="200"
                       image={project.imageUrl || '/project-placeholder.jpg'}
-                      alt={project.title}
                     />
                     <CardContent sx={{ flexGrow: 1 }}>
-                      <Typography variant="h5" component="h2" gutterBottom>
+                      <Typography component="h2" gutterBottom variant="h5">
                         {project.title}
                       </Typography>
-                      <Typography variant="body2" color="text.secondary" paragraph>
+                      <Typography color="text.secondary" paragraph variant="body2">
                         {project.description}
                       </Typography>
                       
@@ -92,24 +92,24 @@ export default function Projects() {
                       <Stack direction="row" spacing={1} sx={{ mt: 'auto' }}>
                         {project.githubUrl && (
                           <Button
-                            size="small"
-                            startIcon={<GitHub />}
                             component="a"
                             href={project.githubUrl}
-                            target="_blank"
                             rel="noopener noreferrer"
+                            size="small"
+                            startIcon={<GitHub />}
+                            target="_blank"
                           >
                             Code
                           </Button>
                         )}
                         {project.liveUrl && (
                           <Button
-                            size="small"
-                            startIcon={<Language />}
                             component="a"
                             href={project.liveUrl}
-                            target="_blank"
                             rel="noopener noreferrer"
+                            size="small"
+                            startIcon={<Language />}
+                            target="_blank"
                           >
                             Demo
                           </Button>
@@ -122,13 +122,13 @@ export default function Projects() {
             </Grid>
           ) : (
             <Box sx={{ textAlign: 'center', py: 6 }}>
-              <Typography variant="h6" color="text.secondary">
+              <Typography color="text.secondary" variant="h6">
                 No projects found matching your search criteria
               </Typography>
               <Button 
-                variant="text" 
                 onClick={() => setSearchQuery('')} 
-                sx={{ mt: 2 }}
+                sx={{ mt: 2 }} 
+                variant="text"
               >
                 Clear Search
               </Button>

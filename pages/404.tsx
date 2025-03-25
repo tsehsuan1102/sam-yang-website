@@ -1,7 +1,7 @@
-import React from 'react';
+import Layout from '@/src/shared/components/Layout';
 import { Box, Button, Container, Typography } from '@mui/material';
 import Link from 'next/link';
-import Layout from '@/src/shared/components/Layout';
+import React from 'react';
 
 export default function Custom404() {
   return (
@@ -17,20 +17,20 @@ export default function Custom404() {
             textAlign: 'center',
           }}
         >
-          <Typography variant="h1" component="h1" gutterBottom>
+          <Typography component="h1" gutterBottom variant="h1">
             404
           </Typography>
-          <Typography variant="h4" component="h2" gutterBottom>
+          <Typography component="h2" gutterBottom variant="h4">
             Page Not Found
           </Typography>
-          <Typography variant="body1" color="text.secondary" paragraph>
+          <Typography color="text.secondary" paragraph variant="body1">
             The page you are looking for does not exist or has been moved.
           </Typography>
           <Button
-            variant="contained"
             component={Link}
             href="/"
             sx={{ mt: 2 }}
+            variant="contained"
           >
             Return to Home
           </Button>
