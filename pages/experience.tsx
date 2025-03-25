@@ -16,6 +16,7 @@ import {
 import { School, Work, Article } from '@mui/icons-material';
 import { profileService } from '@/src/shared/services/profile.service';
 import { motion } from 'framer-motion';
+import Head from 'next/head';
 
 const MotionPaper = motion(Paper);
 
@@ -23,7 +24,12 @@ export default function Experience() {
   const profile = profileService.getProfile();
   
   return (
+    
     <Layout>
+    <Head>
+      <title>Sam Yang | Experience</title>
+      <meta name="description" content="Professional journey and achievements of Sam Yang - AI and full-stack development experience in Japan and Taiwan." />
+    </Head>
       <Container maxWidth="lg">
         <Box sx={{ my: 4 }}>
           <Typography variant="h3" component="h1" gutterBottom textAlign="center">

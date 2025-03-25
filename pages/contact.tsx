@@ -1,4 +1,5 @@
 import React from 'react';
+import Head from 'next/head';
 import Layout from '@/src/shared/components/Layout';
 import { 
   Container, 
@@ -17,6 +18,10 @@ export default function Contact() {
   
   return (
     <Layout>
+      <Head>
+        <title>Sam Yang | Contact</title>
+        <meta name="description" content="Contact information for Sam Yang, a software engineer based in Tokyo with a passion for technology and cross-cultural experiences." />
+      </Head>
       <Container maxWidth="lg">
         <Box sx={{ my: 4 }}>
           <Typography variant="h3" component="h1" gutterBottom textAlign="center">

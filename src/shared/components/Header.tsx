@@ -85,7 +85,7 @@ const Header: React.FC<HeaderProps> = ({ darkMode, toggleDarkMode }) => {
               textDecoration: 'none'
             }}
           >
-            <span style={{ color: theme.palette.primary.main }}>Dev</span>Portfolio
+            <span style={{ color: theme.palette.primary.main }}>Sam</span>Yang
           </Typography>
 
           {/* Desktop Navigation */}
