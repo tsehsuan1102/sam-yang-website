@@ -1,10 +1,10 @@
 // 联系表单服务
 
 export interface ContactForm {
-  name: string;
   email: string;
-  subject: string;
   message: string;
+  name: string;
+  subject: string;
 }
 
 // 联系表单服务类
@@ -12,7 +12,7 @@ export class ContactService {
   // 模拟表单提交
   async submitContactForm(
     form: ContactForm
-  ): Promise<{ success: boolean; message: string }> {
+  ): Promise<{ message: string; success: boolean; }> {
     // 这里模拟API调用，实际项目中应该调用真实的API
     console.log("Submitting contact form:", form);
 
@@ -21,9 +21,9 @@ export class ContactService {
       setTimeout(() => {
         // 模拟成功响应
         resolve({
-          success: true,
           message:
             "Your message has been sent successfully. We will get back to you soon.",
+          success: true,
         });
 
         // 如果需要模拟失败，可以取消注释下面的代码
@@ -37,8 +37,8 @@ export class ContactService {
 
   // 验证表单
   validateForm(form: ContactForm): {
-    isValid: boolean;
     errors: Record<string, string>;
+    isValid: boolean;
   } {
     const errors: Record<string, string> = {};
 
@@ -63,8 +63,8 @@ export class ContactService {
     }
 
     return {
-      isValid: Object.keys(errors).length === 0,
       errors,
+      isValid: Object.keys(errors).length === 0,
     };
   }
 }

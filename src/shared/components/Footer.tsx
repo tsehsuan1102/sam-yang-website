@@ -1,7 +1,8 @@
-import React from 'react';
-import { Box, Container, Typography, Grid, Link as MuiLink, IconButton, Divider } from '@mui/material';
-import { GitHub, LinkedIn, Email } from '@mui/icons-material';
+import { Email, GitHub, LinkedIn } from '@mui/icons-material';
+import { Box, Container, Divider, Grid, IconButton, Link as MuiLink, Typography } from '@mui/material';
 import Link from 'next/link';
+import React from 'react';
+
 import { profileService } from '../services/profile.service';
 
 const Footer: React.FC = () => {
@@ -9,20 +10,20 @@ const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <Box component="footer" sx={{ bgcolor: 'background.paper', py: 6, mt: 'auto' }}>
+    <Box component="footer" sx={{ bgcolor: 'background.paper', mt: 'auto', py: 6 }}>
       <Container maxWidth="lg">
-        <Grid container spacing={4} justifyContent="space-between">
-          <Grid item xs={12} sm={4}>
-            <Typography variant="h6" gutterBottom>
+        <Grid container justifyContent="space-between" spacing={4}>
+          <Grid item sm={4} xs={12}>
+            <Typography gutterBottom variant="h6">
               <span style={{ color: '#3f51b5' }}>Dev</span>Portfolio
             </Typography>
-            <Typography variant="body2" color="text.secondary">
+            <Typography color="text.secondary" variant="body2">
               A personal portfolio showcasing my projects and skills.
             </Typography>
           </Grid>
           
-          <Grid item xs={12} sm={4}>
-            <Typography variant="h6" gutterBottom>
+          <Grid item sm={4} xs={12}>
+            <Typography gutterBottom variant="h6">
               Quick Links
             </Typography>
             <Box>
@@ -34,10 +35,10 @@ const Footer: React.FC = () => {
               ].map((link) => (
                 <Box key={link.name} sx={{ mb: 1 }}>
                   <MuiLink 
+                    color="text.secondary" 
                     component={Link} 
                     href={link.path} 
                     underline="hover" 
-                    color="text.secondary" 
                     variant="body2"
                   >
                     {link.name}
@@ -47,12 +48,12 @@ const Footer: React.FC = () => {
             </Box>
           </Grid>
           
-          <Grid item xs={12} sm={4}>
-            <Typography variant="h6" gutterBottom>
+          <Grid item sm={4} xs={12}>
+            <Typography gutterBottom variant="h6">
               Connect
             </Typography>
             <Box sx={{ mb: 2 }}>
-              <Typography variant="body2" color="text.secondary">
+              <Typography color="text.secondary" variant="body2">
                 {contact.email}
               </Typography>
             </Box>
@@ -62,9 +63,9 @@ const Footer: React.FC = () => {
                   aria-label="GitHub"
                   component="a"
                   href={contact.github}
-                  target="_blank"
                   rel="noopener noreferrer"
                   size="small"
+                  target="_blank"
                 >
                   <GitHub fontSize="small" />
                 </IconButton>
@@ -74,9 +75,9 @@ const Footer: React.FC = () => {
                   aria-label="LinkedIn"
                   component="a"
                   href={contact.linkedin}
-                  target="_blank"
                   rel="noopener noreferrer"
                   size="small"
+                  target="_blank"
                 >
                   <LinkedIn fontSize="small" />
                 </IconButton>
@@ -95,7 +96,7 @@ const Footer: React.FC = () => {
         
         <Divider sx={{ my: 3 }} />
         
-        <Typography variant="body2" color="text.secondary" align="center">
+        <Typography align="center" color="text.secondary" variant="body2">
           © {currentYear} Tse-Hsuan Yang. All rights reserved.
         </Typography>
       </Container>

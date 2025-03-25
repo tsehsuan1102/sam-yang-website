@@ -1,60 +1,60 @@
 // 项目服务，处理项目列表数据
 
 export interface Project {
-  id: string;
-  title: string;
   description: string;
-  technologies: string[];
-  imageUrl?: string;
-  githubUrl?: string;
-  liveUrl?: string;
   featured: boolean;
+  githubUrl?: string;
+  id: string;
+  imageUrl?: string;
+  liveUrl?: string;
+  technologies: string[];
+  title: string;
 }
 
 // Mock 项目数据，需要用户替换为自己的项目
 const projectsData: Project[] = [
   {
-    id: "project1",
-    title: "E-commerce Platform",
     description:
       "A full-stack e-commerce platform with user authentication, product catalog, shopping cart, and payment integration.",
-    technologies: ["React", "Node.js", "Express", "MongoDB", "Stripe"],
-    imageUrl: "/projects/ecommerce.jpg",
-    githubUrl: "https://github.com/yourusername/ecommerce",
-    liveUrl: "https://ecommerce-demo.com",
     featured: true,
+    githubUrl: "https://github.com/yourusername/ecommerce",
+    id: "project1",
+    imageUrl: "/projects/ecommerce.jpg",
+    liveUrl: "https://ecommerce-demo.com",
+    technologies: ["React", "Node.js", "Express", "MongoDB", "Stripe"],
+    title: "E-commerce Platform",
   },
   {
-    id: "project2",
-    title: "Task Management App",
     description:
       "A task management application with features like task creation, assignment, due dates, and status tracking.",
-    technologies: ["Angular", "NestJS", "PostgreSQL", "Docker"],
-    imageUrl: "/projects/taskmanager.jpg",
-    githubUrl: "https://github.com/yourusername/taskmanager",
-    liveUrl: "https://taskmanager-demo.com",
     featured: true,
+    githubUrl: "https://github.com/yourusername/taskmanager",
+    id: "project2",
+    imageUrl: "/projects/taskmanager.jpg",
+    liveUrl: "https://taskmanager-demo.com",
+    technologies: ["Angular", "NestJS", "PostgreSQL", "Docker"],
+    title: "Task Management App",
   },
   {
-    id: "project3",
-    title: "Weather Forecast App",
     description:
       "A weather forecast application that fetches data from weather APIs and displays forecasts for different locations.",
-    technologies: ["React", "Redux", "OpenWeatherMap API"],
-    imageUrl: "/projects/weather.jpg",
-    githubUrl: "https://github.com/yourusername/weather-app",
     featured: false,
+    githubUrl: "https://github.com/yourusername/weather-app",
+    id: "project3",
+    imageUrl: "/projects/weather.jpg",
+    technologies: ["React", "Redux", "OpenWeatherMap API"],
+    title: "Weather Forecast App",
   },
   {
-    id: "project4",
-    title: "Blog Platform",
     description:
       "A blog platform with features like post creation, commenting, user profiles, and search functionality.",
-    technologies: ["Next.js", "GraphQL", "Apollo", "MongoDB"],
-    imageUrl: "/projects/blog.jpg",
-    githubUrl: "https://github.com/yourusername/blog-platform",
-    liveUrl: "https://blog-demo.com",
     featured: false,
+    githubUrl: "https://github.com/yourusername/blog-platform",
+    id: "project4",
+    imageUrl: "/projects/blog.jpg",
+    liveUrl: "https://blog-demo.com",
+    technologies: ["Next.js", "GraphQL", "Apollo", "MongoDB"],
+    title: "Blog Platform",
   },
 ];
 
@@ -70,12 +70,12 @@ export class ProjectsService {
     return this.projects;
   }
 
-  getProjectById(id: string): Project | undefined {
-    return this.projects.find((project) => project.id === id);
-  }
-
   getFeaturedProjects(): Project[] {
     return this.projects.filter((project) => project.featured);
+  }
+
+  getProjectById(id: string): Project | undefined {
+    return this.projects.find((project) => project.id === id);
   }
 
   searchProjects(query: string): Project[] {

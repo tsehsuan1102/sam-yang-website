@@ -9,11 +9,11 @@ export default function Custom404() {
       <Container maxWidth="md">
         <Box
           sx={{
+            alignItems: 'center',
             display: 'flex',
             flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
             height: '70vh',
+            justifyContent: 'center',
             textAlign: 'center',
           }}
         >

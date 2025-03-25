@@ -3,12 +3,12 @@
 import { useEffect, useRef } from "react"
 
 interface Particle {
-  x: number
-  y: number
+  color: string
   size: number
   speedX: number
   speedY: number
-  color: string
+  x: number
+  y: number
 }
 
 export function ParticleBackground() {
@@ -34,12 +34,12 @@ export function ParticleBackground() {
       particles.length = 0
       for (let i = 0; i < particleCount; i++) {
         particles.push({
-          x: Math.random() * canvas.width,
-          y: Math.random() * canvas.height,
+          color: colors[Math.floor(Math.random() * colors.length)],
           size: Math.random() * 2 + 0.5,
           speedX: Math.random() * 0.5 - 0.25,
           speedY: Math.random() * 0.5 - 0.25,
-          color: colors[Math.floor(Math.random() * colors.length)],
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
         })
       }
     }
@@ -94,6 +94,6 @@ export function ParticleBackground() {
     }
   }, [])
 
-  return <canvas ref={canvasRef} className="fixed inset-0 -z-10 h-full w-full bg-black opacity-70" />
+  return <canvas className="fixed inset-0 -z-10 h-full w-full bg-black opacity-70" ref={canvasRef} />
 }
 

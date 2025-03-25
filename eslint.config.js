@@ -1,4 +1,6 @@
 const perfectionist = require("eslint-plugin-perfectionist");
+const typescriptParser = require("@typescript-eslint/parser");
+const typescriptPlugin = require("@typescript-eslint/eslint-plugin");
 
 module.exports = [
   {
@@ -8,12 +10,18 @@ module.exports = [
       '**/.next/**',
       '**/out/**',
       '**/coverage/**',
-      '**/build/**'
+      '**/build/**',
+      'eslint.config.js',
+      '*.config.js',
+      '*.config.ts'
     ],
     plugins: {
       perfectionist,
+      '@typescript-eslint': typescriptPlugin,
     },
     rules: {
+      ...typescriptPlugin.configs.recommended.rules,
+      ...perfectionist.configs['recommended-natural'].rules,
       "perfectionist/sort-imports": [
         "error",
         {
@@ -54,14 +62,27 @@ module.exports = [
           order: "asc",
         },
       ],
+      '@typescript-eslint/no-unused-vars': ['warn'],
+      '@typescript-eslint/no-explicit-any': ['warn'],
+      '@typescript-eslint/no-require-imports': ['off'],
+      '@typescript-eslint/no-unused-expressions': ['error', { 'allowShortCircuit': true, 'allowTernary': true }],
     },
     languageOptions: {
       ecmaVersion: 'latest',
       sourceType: 'module',
+      parser: typescriptParser,
       parserOptions: {
         ecmaFeatures: {
           jsx: true
-        }
+        },
+        ecmaVersion: 'latest',
+        sourceType: 'module',
+        project: './tsconfig.json'
+      }
+    },
+    settings: {
+      next: {
+        rootDir: "."
       }
     }
   },

@@ -1,15 +1,15 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useEffect, useState } from "react"
 
 interface TypingEffectProps {
-  text: string
-  speed?: number
   className?: string
   onComplete?: () => void
+  speed?: number
+  text: string
 }
 
-export function TypingEffect({ text, speed = 50, className = "", onComplete }: TypingEffectProps) {
+export function TypingEffect({ className = "", onComplete, speed = 50, text }: TypingEffectProps) {
   const [displayText, setDisplayText] = useState("")
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isComplete, setIsComplete] = useState(false)

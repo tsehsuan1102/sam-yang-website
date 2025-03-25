@@ -52,6 +52,6 @@ export function AnimatedGradient() {
     }
   }, [])
 
-  return <canvas ref={canvasRef} className="fixed inset-0 -z-10 h-full w-full bg-black opacity-80" />
+  return <canvas className="fixed inset-0 -z-10 h-full w-full bg-black opacity-80" ref={canvasRef} />
 }
 

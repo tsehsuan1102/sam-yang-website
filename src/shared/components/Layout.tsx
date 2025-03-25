@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { Box, CssBaseline, ThemeProvider, createTheme } from '@mui/material';
-import Header from './Header';
-import Footer from './Footer';
-import customTheme from '../utils/theme';
 import AnimatedBackground from '@/components/AnimatedBackground';
+import { Box, createTheme, CssBaseline, ThemeProvider } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+
+import customTheme from '../utils/theme';
+import Footer from './Footer';
+import Header from './Header';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -21,20 +22,20 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         palette: {
           mode: darkMode ? 'dark' : 'light',
           ...(darkMode ? {
-            primary: {
-              main: '#90caf9',
-            },
             background: {
               default: '#121212',
               paper: '#1e1e1e',
             },
-          } : {
             primary: {
-              main: '#3f51b5',
+              main: '#90caf9',
             },
+          } : {
             background: {
               default: '#f5f5f5',
               paper: '#ffffff',
+            },
+            primary: {
+              main: '#3f51b5',
             },
           }),
         },
@@ -65,17 +66,17 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       <CssBaseline />
       <Box 
         sx={{ 
-          display: 'flex', 
-          flexDirection: 'column', 
+          bgcolor: 'background.default', 
+          color: 'text.primary', 
+          display: 'flex',
+          flexDirection: 'column',
           minHeight: '100vh',
-          bgcolor: 'background.default',
-          color: 'text.primary',
           position: 'relative',
         }}
       >
         <AnimatedBackground />
         <Header darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
-        <Box component="main" sx={{ flexGrow: 1, py: 8, position: 'relative', zIndex: 1 }}>
+        <Box component="main" sx={{ flexGrow: 1, position: 'relative', py: 8, zIndex: 1 }}>
           {children}
         </Box>
         {/* <Footer /> */}

@@ -1,21 +1,21 @@
-import React, { useState } from 'react';
+import { Brightness4, Brightness7, GitHub, LinkedIn, Menu as MenuIcon } from '@mui/icons-material';
 import { 
   AppBar, 
-  Toolbar, 
-  Typography, 
-  Button, 
-  IconButton, 
   Box, 
+  Button, 
   Drawer, 
+  IconButton, 
   List, 
   ListItem, 
   ListItemText, 
+  Toolbar, 
+  Typography, 
   useMediaQuery, 
   useTheme 
 } from '@mui/material';
-import { Menu as MenuIcon, Brightness4, Brightness7, GitHub, LinkedIn } from '@mui/icons-material';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import React, { useState } from 'react';
 
 interface NavLink {
   label: string;
@@ -47,19 +47,19 @@ const Header: React.FC<HeaderProps> = ({ darkMode, toggleDarkMode }) => {
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
-      <Typography variant="h6" sx={{ my: 2 }}>
+      <Typography sx={{ my: 2 }} variant="h6">
         <span style={{ color: theme.palette.primary.main }}>Dev</span>Portfolio
       </Typography>
       <List>
         {navLinks.map((link) => (
           <ListItem 
-            key={link.label} 
             component={Link} 
-            href={link.path}
+            href={link.path} 
+            key={link.label}
             sx={{ 
               color: router.pathname === link.path ? theme.palette.primary.main : 'inherit',
-              textAlign: 'center',
               justifyContent: 'center',
+              textAlign: 'center',
               textDecoration: 'none'
             }}
           >
@@ -72,31 +72,31 @@ const Header: React.FC<HeaderProps> = ({ darkMode, toggleDarkMode }) => {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="fixed" color="default" elevation={1} sx={{ backdropFilter: 'blur(20px)' }}>
+      <AppBar color="default" elevation={1} position="fixed" sx={{ backdropFilter: 'blur(20px)' }}>
         <Toolbar>
           <Typography
-            variant="h6"
             component={Link}
             href="/"
             sx={{
+              color: 'text.primary',
               flexGrow: 1,
               fontWeight: 'bold',
-              color: 'text.primary',
               textDecoration: 'none'
             }}
+            variant="h6"
           >
             <span style={{ color: theme.palette.primary.main }}>Sam</span>Yang
           </Typography>
 
           {/* Desktop Navigation */}
           {!isMobile && (
-            <Box sx={{ display: 'flex', alignItems: 'center' }}>
+            <Box sx={{ alignItems: 'center', display: 'flex' }}>
               {navLinks.map((link) => (
                 <Button
-                  key={link.label}
+                  color={router.pathname === link.path ? 'primary' : 'inherit'}
                   component={Link}
                   href={link.path}
-                  color={router.pathname === link.path ? 'primary' : 'inherit'}
+                  key={link.label}
                   sx={{ mx: 1 }}
                 >
                   {link.label}
@@ -106,7 +106,7 @@ const Header: React.FC<HeaderProps> = ({ darkMode, toggleDarkMode }) => {
           )}
 
           {/* Social Links & Theme Toggle */}
-          <Box sx={{ display: 'flex', alignItems: 'center', ml: 2 }}>
+          <Box sx={{ alignItems: 'center', display: 'flex', ml: 2 }}>
             {/* <IconButton
               color="inherit"
               aria-label="toggle theme"
@@ -117,25 +117,25 @@ const Header: React.FC<HeaderProps> = ({ darkMode, toggleDarkMode }) => {
               {darkMode ? <Brightness7 /> : <Brightness4 />}
             </IconButton> */}
             <IconButton
-              color="inherit"
               aria-label="github profile"
-              edge="end"
+              color="inherit"
               component="a"
+              edge="end"
               href="https://github.com/tsehsuan1102"
-              target="_blank"
               rel="noopener noreferrer"
               sx={{ mr: 1 }}
+              target="_blank"
             >
               <GitHub />
             </IconButton>
             <IconButton
-              color="inherit"
               aria-label="linkedin profile"
-              edge="end"
+              color="inherit"
               component="a"
+              edge="end"
               href="https://www.linkedin.com/in/tse-hsuan-yang/"
-              target="_blank"
               rel="noopener noreferrer"
+              target="_blank"
             >
               <LinkedIn />
             </IconButton>
@@ -143,8 +143,8 @@ const Header: React.FC<HeaderProps> = ({ darkMode, toggleDarkMode }) => {
             {/* Mobile Menu Button */}
             {isMobile && (
               <IconButton
-                color="inherit"
                 aria-label="open drawer"
+                color="inherit"
                 edge="end"
                 onClick={handleDrawerToggle}
                 sx={{ ml: 1 }}
@@ -159,16 +159,16 @@ const Header: React.FC<HeaderProps> = ({ darkMode, toggleDarkMode }) => {
       {/* Mobile Navigation Drawer */}
       <Box component="nav">
         <Drawer
-          variant="temporary"
-          open={mobileOpen}
-          onClose={handleDrawerToggle}
           ModalProps={{
             keepMounted: true, // Better open performance on mobile.
           }}
+          onClose={handleDrawerToggle}
+          open={mobileOpen}
           sx={{
-            display: { xs: 'block', md: 'none' },
             '& .MuiDrawer-paper': { boxSizing: 'border-box', width: 240 },
+            display: { md: 'none', xs: 'block' },
           }}
+          variant="temporary"
         >
           {drawer}
         </Drawer>

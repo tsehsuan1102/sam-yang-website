@@ -43,7 +43,7 @@ export default function Contact() {
                     Here's how you can reach me
                   </Typography>
                   
-                  <Box sx={{ display: 'flex', alignItems: 'center', mb: 2, mt: 3 }}>
+                  <Box sx={{ alignItems: 'center', display: 'flex', mb: 2, mt: 3 }}>
                     <Email color="primary" sx={{ mr: 2 }} />
                     <Typography variant="body1">
                       {profile.contact.email}
@@ -51,12 +51,12 @@ export default function Contact() {
                   </Box>
                   
                   {profile.contact.linkedin && (
-                    <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+                    <Box sx={{ alignItems: 'center', display: 'flex', mb: 2 }}>
                       <Box 
                         alt="LinkedIn" 
                         component="img" 
                         src="/linkedin-icon.png" 
-                        sx={{ width: 24, height: 24, mr: 2 }} 
+                        sx={{ height: 24, mr: 2, width: 24 }} 
                       />
                       <Typography variant="body1">
                         <Box 
@@ -73,12 +73,12 @@ export default function Contact() {
                   )}
                   
                   {profile.contact.github && (
-                    <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+                    <Box sx={{ alignItems: 'center', display: 'flex', mb: 2 }}>
                       <Box 
                         alt="GitHub" 
                         component="img" 
                         src="/github-icon.png" 
-                        sx={{ width: 24, height: 24, mr: 2 }} 
+                        sx={{ height: 24, mr: 2, width: 24 }} 
                       />
                       <Typography variant="body1">
                         <Box 

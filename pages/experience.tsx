@@ -1,22 +1,16 @@
 import Layout from '@/src/shared/components/Layout';
 import { profileService } from '@/src/shared/services/profile.service';
 import { Article, School, Work } from '@mui/icons-material';
-import { 
-  Box, 
-  Card, 
-  CardContent, 
-  Chip, 
+import {
+  Box,
   Container,
   Divider,
   Grid,
-  Link as MuiLink,
   Paper,
-  Stack,
   Typography
 } from '@mui/material';
 import { motion } from 'framer-motion';
 import Head from 'next/head';
-import React from 'react';
 
 const MotionPaper = motion(Paper);
 
@@ -48,18 +42,18 @@ export default function Experience() {
                 elevation={0}
                 initial={{ opacity: 0, y: 20 }}
                 sx={{ 
-                  p: 3,
-                  height: '100%',
-                  borderRadius: 2,
-                  transition: 'all 0.3s ease-in-out',
                   '&:hover': {
-                    transform: 'translateY(-4px)',
-                    boxShadow: 3
-                  }
+                    boxShadow: 3,
+                    transform: 'translateY(-4px)'
+                  },
+                  borderRadius: 2,
+                  height: '100%',
+                  p: 3,
+                  transition: 'all 0.3s ease-in-out'
                 }}
                 transition={{ duration: 0.5 }}
               >
-                <Box sx={{ display: 'flex', alignItems: 'center', mb: 3 }}>
+                <Box sx={{ alignItems: 'center', display: 'flex', mb: 3 }}>
                   <Work color="primary" sx={{ mr: 2 }} />
                   <Typography variant="h5">Work Experience</Typography>
                 </Box>
@@ -87,18 +81,18 @@ export default function Experience() {
                 elevation={0}
                 initial={{ opacity: 0, y: 20 }}
                 sx={{ 
-                  p: 3,
-                  height: '100%',
-                  borderRadius: 2,
-                  transition: 'all 0.3s ease-in-out',
                   '&:hover': {
-                    transform: 'translateY(-4px)',
-                    boxShadow: 3
-                  }
+                    boxShadow: 3,
+                    transform: 'translateY(-4px)'
+                  },
+                  borderRadius: 2,
+                  height: '100%',
+                  p: 3,
+                  transition: 'all 0.3s ease-in-out'
                 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
+                transition={{ delay: 0.2, duration: 0.5 }}
               >
-                <Box sx={{ display: 'flex', alignItems: 'center', mb: 3 }}>
+                <Box sx={{ alignItems: 'center', display: 'flex', mb: 3 }}>
                   <Article color="primary" sx={{ mr: 2 }} />
                   <Typography variant="h5">Research & Publications</Typography>
                 </Box>
@@ -132,17 +126,17 @@ export default function Experience() {
                 elevation={0}
                 initial={{ opacity: 0, y: 20 }}
                 sx={{ 
-                  p: 3,
-                  borderRadius: 2,
-                  transition: 'all 0.3s ease-in-out',
                   '&:hover': {
-                    transform: 'translateY(-4px)',
-                    boxShadow: 3
-                  }
+                    boxShadow: 3,
+                    transform: 'translateY(-4px)'
+                  },
+                  borderRadius: 2,
+                  p: 3,
+                  transition: 'all 0.3s ease-in-out'
                 }}
-                transition={{ duration: 0.5, delay: 0.4 }}
+                transition={{ delay: 0.4, duration: 0.5 }}
               >
-                <Box sx={{ display: 'flex', alignItems: 'center', mb: 3 }}>
+                <Box sx={{ alignItems: 'center', display: 'flex', mb: 3 }}>
                   <School color="primary" sx={{ mr: 2 }} />
                   <Typography variant="h5">Education</Typography>
                 </Box>

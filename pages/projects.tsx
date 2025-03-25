@@ -41,7 +41,7 @@ export default function Projects() {
           <Divider sx={{ my: 4 }} />
           
           {/* 搜索框 */}
-          <Box sx={{ maxWidth: 500, mx: 'auto', mb: 6 }}>
+          <Box sx={{ maxWidth: 500, mb: 6, mx: 'auto' }}>
             <TextField
               fullWidth
               InputProps={{
@@ -63,7 +63,7 @@ export default function Projects() {
             <Grid container spacing={4}>
               {filteredProjects.map((project) => (
                 <Grid item key={project.id} lg={4} md={6} xs={12}>
-                  <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+                  <Card sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
                     <CardMedia
                       alt={project.title}
                       component="img"
@@ -84,7 +84,7 @@ export default function Projects() {
                             key={tech}
                             label={tech}
                             size="small"
-                            sx={{ mr: 0.5, mb: 0.5 }}
+                            sx={{ mb: 0.5, mr: 0.5 }}
                           />
                         ))}
                       </Box>
@@ -121,7 +121,7 @@ export default function Projects() {
               ))}
             </Grid>
           ) : (
-            <Box sx={{ textAlign: 'center', py: 6 }}>
+            <Box sx={{ py: 6, textAlign: 'center' }}>
               <Typography color="text.secondary" variant="h6">
                 No projects found matching your search criteria
               </Typography>
