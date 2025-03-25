@@ -12,9 +12,11 @@ import {
   Accordion,
   AccordionSummary,
   AccordionDetails,
-  Fade
+  Fade,
+  ImageList,
+  ImageListItem
 } from '@mui/material';
-import { ExpandMore } from '@mui/icons-material';
+import { ExpandMore, Code, SportsVolleyball, Flight, Celebration } from '@mui/icons-material';
 import { profileService } from '@/src/shared/services/profile.service';
 import { motion } from 'framer-motion';
 
@@ -76,47 +78,17 @@ export default function About() {
                   {profile.name}
                 </Typography>
                 <Typography variant="subtitle1" color="text.secondary" gutterBottom>
-                  {profile.title}
+                  Software Engineer in Tokyo
                 </Typography>
                 <Typography variant="body2" textAlign="center" sx={{ mt: 2 }}>
-                  {profile.bio}
+                  A tech enthusiast from Taiwan, embracing new adventures in Japan
                 </Typography>
               </MotionPaper>
             </Grid>
             
             {/* Main Content Section */}
             <Grid item xs={12} md={8}>
-              {/* My Story Section */}
-              <Accordion 
-                expanded={expanded === 'story'} 
-                onChange={handleChange('story')}
-                sx={{ 
-                  mb: 2,
-                  borderRadius: '8px !important',
-                  '&:before': { display: 'none' },
-                  transition: 'all 0.3s ease-in-out',
-                  '&:not([aria-expanded="true"]):hover': {
-                    bgcolor: 'background.paper',
-                    transform: 'translateX(8px)'
-                  }
-                }}
-              >
-                <AccordionSummary expandIcon={<ExpandMore />}>
-                  <Typography variant="h5" color="primary">My Story</Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                  <Typography variant="body1" paragraph>
-                    Born and raised in Taiwan, I grew up with a deep appreciation for technology and innovation. 
-                    My journey in computer science began during my high school years, where I discovered my passion for programming and problem-solving.
-                  </Typography>
-                  <Typography variant="body1" paragraph>
-                    Currently, I'm based in Japan, where I've been embracing new challenges and opportunities in the tech industry. 
-                    This international experience has not only broadened my professional perspective but also enriched my understanding of different work cultures and approaches to innovation.
-                  </Typography>
-                </AccordionDetails>
-              </Accordion>
-
-              {/* Professional Journey */}
+              {/* Programming Journey */}
               <Accordion 
                 expanded={expanded === 'journey'} 
                 onChange={handleChange('journey')}
@@ -132,32 +104,29 @@ export default function About() {
                 }}
               >
                 <AccordionSummary expandIcon={<ExpandMore />}>
-                  <Typography variant="h5" color="primary">Professional Journey</Typography>
+                  <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                    <Code color="primary" sx={{ mr: 2 }} />
+                    <Typography variant="h5" color="primary">My Programming Journey</Typography>
+                  </Box>
                 </AccordionSummary>
                 <AccordionDetails>
-                  {profile.experience.map((exp, index) => (
-                    <Fade in key={index} timeout={500 + index * 200}>
-                      <Box sx={{ mb: 3 }}>
-                        <Typography variant="h6">
-                          {exp.position}
-                        </Typography>
-                        <Typography variant="subtitle1" color="text.secondary" gutterBottom>
-                          {exp.company} | {exp.period}
-                        </Typography>
-                        <Typography variant="body2">
-                          {exp.description}
-                        </Typography>
-                        {index < profile.experience.length - 1 && <Divider sx={{ my: 2 }} />}
-                      </Box>
-                    </Fade>
-                  ))}
+                  <Typography variant="body1" paragraph>
+                    My fascination with programming began in middle school when I first encountered Scratch. 
+                    That simple block-based programming language opened up a world of possibilities, showing me 
+                    how I could create and bring my ideas to life through code.
+                  </Typography>
+                  <Typography variant="body1" paragraph>
+                    This early exposure sparked a passion that would shape my future. During high school, 
+                    I dove deeper into algorithmic problem-solving, finding joy in the logical challenges 
+                    and the satisfaction of creating efficient solutions.
+                  </Typography>
                 </AccordionDetails>
               </Accordion>
 
-              {/* Education & Research */}
+              {/* Sports & Activities */}
               <Accordion 
-                expanded={expanded === 'education'} 
-                onChange={handleChange('education')}
+                expanded={expanded === 'sports'} 
+                onChange={handleChange('sports')}
                 sx={{ 
                   mb: 2,
                   borderRadius: '8px !important',
@@ -170,44 +139,71 @@ export default function About() {
                 }}
               >
                 <AccordionSummary expandIcon={<ExpandMore />}>
-                  <Typography variant="h5" color="primary">Education & Research</Typography>
+                  <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                    <SportsVolleyball color="primary" sx={{ mr: 2 }} />
+                    <Typography variant="h5" color="primary">Sports & Activities</Typography>
+                  </Box>
                 </AccordionSummary>
                 <AccordionDetails>
-                  {profile.education.map((edu, index) => (
-                    <Fade in key={index} timeout={500 + index * 200}>
-                      <Box sx={{ mb: 3 }}>
-                        <Typography variant="h6">
-                          {edu.degree}
-                        </Typography>
-                        <Typography variant="subtitle1" color="text.secondary" gutterBottom>
-                          {edu.institution} | {edu.period}
-                        </Typography>
-                      </Box>
-                    </Fade>
-                  ))}
-                  <Divider sx={{ my: 3 }} />
-                  <Typography variant="h6" gutterBottom>
-                    Research Publications
+                  <Typography variant="body1" paragraph>
+                    Volleyball has been my sporting passion since high school. What started as casual games 
+                    with friends evolved into a more serious commitment when I joined the department team 
+                    at university. The sport taught me valuable lessons about teamwork, communication, and 
+                    perseverance.
                   </Typography>
-                  {profile.awards.map((award, index) => (
-                    <Fade in key={index} timeout={500 + index * 200}>
-                      <Box sx={{ mb: 2 }}>
-                        <Typography variant="subtitle1" color="primary">
-                          {award.name}
-                        </Typography>
-                        <Typography variant="body2" color="text.secondary">
-                          {award.paperName}
-                        </Typography>
-                      </Box>
-                    </Fade>
-                  ))}
+                  <Typography variant="body1">
+                    The thrill of a well-executed play, the camaraderie among teammates, and the excitement 
+                    of inter-departmental tournaments created some of my most cherished university memories. 
+                    Even today, I try to find time for volleyball, as it's not just exercise but a way to 
+                    connect with others and maintain a healthy work-life balance.
+                  </Typography>
                 </AccordionDetails>
               </Accordion>
 
-              {/* Personal Interests */}
+              {/* Japanese Culture & Life */}
               <Accordion 
-                expanded={expanded === 'interests'} 
-                onChange={handleChange('interests')}
+                expanded={expanded === 'japan'} 
+                onChange={handleChange('japan')}
+                sx={{ 
+                  mb: 2,
+                  borderRadius: '8px !important',
+                  '&:before': { display: 'none' },
+                  transition: 'all 0.3s ease-in-out',
+                  '&:not([aria-expanded="true"]):hover': {
+                    bgcolor: 'background.paper',
+                    transform: 'translateX(8px)'
+                  }
+                }}
+              >
+                <AccordionSummary expandIcon={<ExpandMore />}>
+                  <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                    <Flight color="primary" sx={{ mr: 2 }} />
+                    <Typography variant="h5" color="primary">Life in Japan</Typography>
+                  </Box>
+                </AccordionSummary>
+                <AccordionDetails>
+                  <Typography variant="body1" paragraph>
+                    My connection with Japanese culture began long before moving here, through anime, games, 
+                    and J-pop during my childhood. This early exposure cultivated a deep appreciation for 
+                    Japanese creativity and attention to detail.
+                  </Typography>
+                  <Typography variant="body1" paragraph>
+                    Now living in Tokyo since September 2024, I'm experiencing firsthand the fascinating blend 
+                    of tradition and innovation that makes Japan unique. From the efficiency of daily life to 
+                    the warmth of local communities, every day brings new discoveries and learning opportunities.
+                  </Typography>
+                  <Typography variant="body1">
+                    While adapting to life in a new country has its challenges, the experience has been 
+                    incredibly rewarding. I'm excited to continue exploring Japanese culture, improving my 
+                    language skills, and contributing to the local tech community.
+                  </Typography>
+                </AccordionDetails>
+              </Accordion>
+
+              {/* Goals & Aspirations */}
+              <Accordion 
+                expanded={expanded === 'goals'} 
+                onChange={handleChange('goals')}
                 sx={{ 
                   borderRadius: '8px !important',
                   '&:before': { display: 'none' },
@@ -219,16 +215,22 @@ export default function About() {
                 }}
               >
                 <AccordionSummary expandIcon={<ExpandMore />}>
-                  <Typography variant="h5" color="primary">Beyond the Code</Typography>
+                  <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                    <Celebration color="primary" sx={{ mr: 2 }} />
+                    <Typography variant="h5" color="primary">Goals & Aspirations</Typography>
+                  </Box>
                 </AccordionSummary>
                 <AccordionDetails>
                   <Typography variant="body1" paragraph>
-                    When I'm not immersed in code, I enjoy exploring the unique blend of traditional and modern culture that Japan offers. 
-                    Living here has given me the opportunity to experience everything from local festivals to cutting-edge technology exhibitions.
+                    As I establish my life in Japan, my goals extend beyond professional development. 
+                    I aim to create meaningful connections within both the tech community and the broader 
+                    society, serving as a bridge between Taiwanese and Japanese cultures.
                   </Typography>
                   <Typography variant="body1">
-                    I'm also passionate about bridging the gap between different tech communities and often participate in both Taiwanese and Japanese tech meetups, 
-                    sharing knowledge and experiences across cultures.
+                    Looking ahead, I'm excited about the possibilities of combining my technical expertise 
+                    with my cross-cultural experiences to contribute to innovative solutions. Whether it's 
+                    through technology, community involvement, or cultural exchange, I hope to make a 
+                    positive impact in my new home while continuing to grow both personally and professionally.
                   </Typography>
                 </AccordionDetails>
               </Accordion>
