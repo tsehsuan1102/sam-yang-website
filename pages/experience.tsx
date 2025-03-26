@@ -1,14 +1,7 @@
 import Layout from '@/src/shared/components/Layout';
 import { profileService } from '@/src/shared/services/profile.service';
 import { Article, School, Work } from '@mui/icons-material';
-import {
-  Box,
-  Container,
-  Divider,
-  Grid,
-  Paper,
-  Typography
-} from '@mui/material';
+import { Box, Container, Divider, Grid, Paper, Typography } from '@mui/material';
 import { motion } from 'framer-motion';
 import Head from 'next/head';
 
@@ -16,14 +9,16 @@ const MotionPaper = motion(Paper);
 
 export default function Experience() {
   const profile = profileService.getProfile();
-  
+
   return (
-    
     <Layout>
-    <Head>
-      <title>Sam Yang | Experience</title>
-      <meta content="Professional journey and achievements of Sam Yang - AI and full-stack development experience in Japan and Taiwan." name="description" />
-    </Head>
+      <Head>
+        <title>Sam Yang | Experience</title>
+        <meta
+          content="Professional journey and achievements of Sam Yang - AI and full-stack development experience in Japan and Taiwan."
+          name="description"
+        />
+      </Head>
       <Container maxWidth="lg">
         <Box sx={{ my: 4 }}>
           <Typography component="h1" gutterBottom textAlign="center" variant="h3">
@@ -33,7 +28,7 @@ export default function Experience() {
             My professional journey in software development and research
           </Typography>
           <Divider sx={{ my: 4 }} />
-          
+
           <Grid container spacing={4}>
             {/* Work Experience Section */}
             <Grid item md={6} xs={12}>
@@ -41,15 +36,15 @@ export default function Experience() {
                 animate={{ opacity: 1, y: 0 }}
                 elevation={0}
                 initial={{ opacity: 0, y: 20 }}
-                sx={{ 
+                sx={{
                   '&:hover': {
                     boxShadow: 3,
-                    transform: 'translateY(-4px)'
+                    transform: 'translateY(-4px)',
                   },
                   borderRadius: 2,
                   height: '100%',
                   p: 3,
-                  transition: 'all 0.3s ease-in-out'
+                  transition: 'all 0.3s ease-in-out',
                 }}
                 transition={{ duration: 0.5 }}
               >
@@ -80,15 +75,15 @@ export default function Experience() {
                 animate={{ opacity: 1, y: 0 }}
                 elevation={0}
                 initial={{ opacity: 0, y: 20 }}
-                sx={{ 
+                sx={{
                   '&:hover': {
                     boxShadow: 3,
-                    transform: 'translateY(-4px)'
+                    transform: 'translateY(-4px)',
                   },
                   borderRadius: 2,
                   height: '100%',
                   p: 3,
-                  transition: 'all 0.3s ease-in-out'
+                  transition: 'all 0.3s ease-in-out',
                 }}
                 transition={{ delay: 0.2, duration: 0.5 }}
               >
@@ -101,8 +96,9 @@ export default function Experience() {
                     Natural Language Processing Research
                   </Typography>
                   <Typography paragraph variant="body2">
-                    During my time at National Taiwan University, I focused on Natural Language Processing research,
-                    contributing to multiple publications and presenting at international conferences.
+                    During my time at National Taiwan University, I focused on Natural Language
+                    Processing research, contributing to multiple publications and presenting at
+                    international conferences.
                   </Typography>
                 </Box>
                 {profile.awards.map((award, index) => (
@@ -125,14 +121,14 @@ export default function Experience() {
                 animate={{ opacity: 1, y: 0 }}
                 elevation={0}
                 initial={{ opacity: 0, y: 20 }}
-                sx={{ 
+                sx={{
                   '&:hover': {
                     boxShadow: 3,
-                    transform: 'translateY(-4px)'
+                    transform: 'translateY(-4px)',
                   },
                   borderRadius: 2,
                   p: 3,
-                  transition: 'all 0.3s ease-in-out'
+                  transition: 'all 0.3s ease-in-out',
                 }}
                 transition={{ delay: 0.4, duration: 0.5 }}
               >

@@ -1,8 +1,18 @@
-import { Box, useTheme } from "@mui/material";
-import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { Box, useTheme } from '@mui/material';
+import { motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
 
-const Particle = ({ color, delay, duration, size, theme, x, y }: any) => (
+interface ParticleProps {
+  color: string;
+  delay: number;
+  duration: number;
+  id: number;
+  size: number;
+  x: string;
+  y: string;
+}
+
+const Particle = ({ color, delay, duration, size, x, y }: ParticleProps) => (
   <motion.div
     animate={{
       opacity: [0, 0.8, 0],
@@ -22,16 +32,16 @@ const Particle = ({ color, delay, duration, size, theme, x, y }: any) => (
     transition={{
       delay,
       duration,
-      ease: "easeInOut",
+      ease: 'easeInOut',
       repeat: Infinity,
-      repeatType: "loop",
+      repeatType: 'loop',
     }}
   />
 );
 
-export default function AnimatedBackground() {
+const AnimatedBackground = () => {
   const theme = useTheme();
-  const [particles, setParticles] = useState<any[]>([]);
+  const [particles, setParticles] = useState<ParticleProps[]>([]);
 
   useEffect(() => {
     // 創建粒子
@@ -41,11 +51,15 @@ export default function AnimatedBackground() {
       duration: Math.random() * 3 + 2,
       id: i,
       size: Math.random() * 150 + 80,
-      x: Math.random() * 100,
-      y: Math.random() * 100,
+      x: `${Math.random() * 100}%`,
+      y: `${Math.random() * 100}%`,
     }));
     setParticles(newParticles);
   }, [theme]);
+
+  const handleMouseMove = (event: MouseEvent) => {
+    // ... existing code ...
+  };
 
   return (
     <Box
@@ -78,9 +92,9 @@ export default function AnimatedBackground() {
         }}
         transition={{
           duration: 15,
-          ease: "easeInOut",
+          ease: 'easeInOut',
           repeat: Infinity,
-          repeatType: "reverse",
+          repeatType: 'reverse',
         }}
       />
 
@@ -95,30 +109,20 @@ export default function AnimatedBackground() {
           left: '50%',
           position: 'absolute',
           top: '50%',
-          //   background: `radial-gradient(circle at 50% 50%, ${theme.palette.secondary.main}30, transparent 70%)`,
           transform: 'translate(-50%, -50%)',
-        width: '100%',
+          width: '100%',
         }}
         transition={{
           duration: 8,
-          ease: "easeInOut",
+          ease: 'easeInOut',
           repeat: Infinity,
-          repeatType: "reverse",
+          repeatType: 'reverse',
         }}
       />
 
       {/* 粒子系統 */}
       {particles.map((particle) => (
-        <Particle
-          color={particle.color}
-          delay={particle.delay}
-          duration={particle.duration}
-          key={particle.id}
-          size={particle.size}
-          theme={theme}
-          x={`${particle.x}%`}
-          y={`${particle.y}%`}
-        />
+        <Particle key={particle.id} {...particle} />
       ))}
 
       {/* 半透明遮罩層 */}
@@ -132,4 +136,6 @@ export default function AnimatedBackground() {
       />
     </Box>
   );
-} 
+};
+
+export default AnimatedBackground;
