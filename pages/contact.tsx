@@ -2,10 +2,56 @@ import SEO from '@/components/SEO';
 import Layout from '@/src/shared/components/Layout';
 import { profileService } from '@/src/shared/services/profile.service';
 import { Email } from '@mui/icons-material';
-import { Box, Card, CardContent, Container, Divider, Grid, Typography } from '@mui/material';
+import {
+  Box,
+  Card,
+  CardContent,
+  Container,
+  Divider,
+  Grid,
+  Typography,
+  TextField,
+  Button,
+  Alert,
+} from '@mui/material';
+import { useState } from 'react';
+import { saveContactMessage } from '@/lib/supabase';
 
 export default function Contact() {
   const profile = profileService.getProfile();
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: '',
+  });
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [error, setError] = useState<string | null>(null);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus('loading');
+    setError(null);
+
+    try {
+      await saveContactMessage({
+        name: formData.name,
+        email: formData.email || null,
+        message: formData.message,
+      });
+
+      setStatus('success');
+      setFormData({ name: '', email: '', message: '' });
+    } catch (err) {
+      setStatus('error');
+      setError(err instanceof Error ? err.message : 'Please try again');
+    }
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
   return (
     <>
       <SEO
@@ -24,7 +70,7 @@ export default function Contact() {
             <Divider sx={{ my: 4 }} />
 
             <Grid container justifyContent="center" spacing={6}>
-              {/* 联系方式 */}
+              {/* Contact Information */}
               <Grid item md={6} xs={12}>
                 <Card>
                   <CardContent>
@@ -82,6 +128,75 @@ export default function Contact() {
                           </Box>
                         </Typography>
                       </Box>
+                    )}
+                  </CardContent>
+                </Card>
+              </Grid>
+
+              {/* Contact Form */}
+              <Grid item md={6} xs={12}>
+                <Card>
+                  <CardContent>
+                    <Typography gutterBottom variant="h5">
+                      Send a Message
+                    </Typography>
+                    <Typography color="text.secondary" paragraph variant="body2">
+                      Leave me a message or feedback and I'll get back to you
+                    </Typography>
+
+                    <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
+                      <TextField
+                        fullWidth
+                        id="name"
+                        label="Name"
+                        name="name"
+                        value={formData.name}
+                        onChange={handleChange}
+                        margin="normal"
+                      />
+                      <TextField
+                        fullWidth
+                        id="email"
+                        label="Email (Optional)"
+                        name="email"
+                        type="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        margin="normal"
+                      />
+                      <TextField
+                        fullWidth
+                        required
+                        id="message"
+                        label="Message"
+                        name="message"
+                        multiline
+                        rows={4}
+                        value={formData.message}
+                        onChange={handleChange}
+                        margin="normal"
+                      />
+                      <Button
+                        fullWidth
+                        type="submit"
+                        variant="contained"
+                        disabled={status === 'loading'}
+                        sx={{ mt: 3 }}
+                      >
+                        {status === 'loading' ? 'Sending...' : 'Send Message'}
+                      </Button>
+                    </Box>
+
+                    {status === 'success' && (
+                      <Alert severity="success" sx={{ mt: 2 }}>
+                        Message sent successfully! Thank you for reaching out.
+                      </Alert>
+                    )}
+
+                    {status === 'error' && (
+                      <Alert severity="error" sx={{ mt: 2 }}>
+                        {error}
+                      </Alert>
                     )}
                   </CardContent>
                 </Card>
