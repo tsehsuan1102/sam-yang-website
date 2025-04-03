@@ -4,11 +4,13 @@ import { Article, School, Work } from '@mui/icons-material';
 import { Box, Container, Divider, Grid, Paper, Typography } from '@mui/material';
 import { motion } from 'framer-motion';
 import Head from 'next/head';
+import SkillRadarChart from '@/components/SkillRadarChart';
 
 const MotionPaper = motion(Paper);
 
 export default function Experience() {
   const profile = profileService.getProfile();
+  const showSkills = false;
 
   return (
     <Layout>
@@ -149,6 +151,29 @@ export default function Experience() {
                 ))}
               </MotionPaper>
             </Grid>
+
+            {/* Skills Radar Chart Section */}
+            {showSkills && (
+              <Grid item xs={12}>
+                <MotionPaper
+                  animate={{ opacity: 1, y: 0 }}
+                  elevation={0}
+                  initial={{ opacity: 0, y: 20 }}
+                  sx={{
+                    '&:hover': {
+                      boxShadow: 3,
+                      transform: 'translateY(-4px)',
+                    },
+                    borderRadius: 2,
+                    p: 3,
+                    transition: 'all 0.3s ease-in-out',
+                  }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <SkillRadarChart />
+                </MotionPaper>
+              </Grid>
+            )}
           </Grid>
         </Box>
       </Container>
