@@ -40,6 +40,7 @@ export default function About() {
             <Typography component="h1" gutterBottom textAlign="center" variant="h3">
               About Me
             </Typography>
+
             <Divider sx={{ mb: 6 }} />
 
             <Grid container spacing={6}>
@@ -63,7 +64,7 @@ export default function About() {
                   }}
                   transition={{ duration: 0.5 }}
                 >
-                  <Avatar
+                  {/* <Avatar
                     alt={profile.name}
                     src="/avatar.jpg"
                     sx={{
@@ -75,7 +76,29 @@ export default function About() {
                       transition: 'transform 0.3s ease-in-out',
                       width: 200,
                     }}
-                  />
+                  /> */}
+                  <Box
+                    sx={{
+                      mt: 4,
+                      mb: 6,
+                      width: '100%',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <img
+                      src="/ai-business-card.png"
+                      alt="AI Business Card"
+                      style={{
+                        maxHeight: '300px',
+                        borderRadius: 8,
+                        boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
+                        margin: '0 auto',
+                        display: 'block',
+                      }}
+                    />
+                  </Box>
                   <Typography gutterBottom variant="h5">
                     {profile.name}
                   </Typography>
@@ -85,6 +108,7 @@ export default function About() {
                   <Typography sx={{ mt: 2 }} textAlign="center" variant="body2">
                     A tech enthusiast from Taiwan, embracing new adventures in Japan
                   </Typography>
+                  {/* Business Card Preview */}
                 </MotionPaper>
               </Grid>
 
