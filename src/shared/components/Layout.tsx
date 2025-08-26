@@ -1,9 +1,9 @@
 import AnimatedBackground from '@/components/AnimatedBackground';
+import PageTransition from '@/components/ui-effects/page-transition';
 import { Box, createTheme, CssBaseline, ThemeProvider } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 
 import customTheme from '../utils/theme';
-import Footer from './Footer';
 import Header from './Header';
 
 interface LayoutProps {
@@ -77,7 +77,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         <AnimatedBackground />
         <Header darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
         <Box component="main" sx={{ flexGrow: 1, position: 'relative', py: 8, zIndex: 1 }}>
-          {children}
+          <PageTransition>
+            {children}
+          </PageTransition>
         </Box>
         {/* <Footer /> */}
       </Box>
