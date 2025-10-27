@@ -1,12 +1,10 @@
 import SEO from '@/components/SEO';
+import AnimatedAccordion from '@/components/ui/animated-accordion';
+import SmoothScrollReveal from '@/components/ui-effects/smooth-scroll-reveal';
 import Layout from '@/src/shared/components/Layout';
 import { profileService } from '@/src/shared/services/profile.service';
-import { Celebration, Code, ExpandMore, Flight, SportsVolleyball } from '@mui/icons-material';
+import { Celebration, Code, Flight, SportsVolleyball } from '@mui/icons-material';
 import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-  Avatar,
   Box,
   Container,
   Divider,
@@ -15,16 +13,18 @@ import {
   Typography,
   useTheme,
 } from '@mui/material';
+import { alpha } from '@mui/material/styles';
 import { motion } from 'framer-motion';
 import React from 'react';
+
 const MotionPaper = motion(Paper);
 
 export default function About() {
   const profile = profileService.getProfile();
   const theme = useTheme();
-  const [expanded, setExpanded] = React.useState<false | string>('story');
+  const [expanded, setExpanded] = React.useState<false | string>('journey');
 
-  const handleChange = (panel: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {
+  const handleChange = (panel: string) => (_event: React.SyntheticEvent, isExpanded: boolean) => {
     setExpanded(isExpanded ? panel : false);
   };
 
@@ -37,107 +37,112 @@ export default function About() {
       <Layout>
         <Container maxWidth="lg">
           <Box sx={{ my: 4 }}>
-            <Typography component="h1" gutterBottom textAlign="center" variant="h3">
-              About Me
-            </Typography>
+            <SmoothScrollReveal delay={0.2}>
+              <Typography
+                component="h1"
+                gutterBottom
+                sx={{
+                  background: `linear-gradient(45deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
+                  backgroundClip: 'text',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  fontWeight: 'bold',
+                  fontSize: { xs: '2.5rem', md: '3.5rem' },
+                  letterSpacing: '-0.02em',
+                }}
+                textAlign="center"
+                variant="h3"
+              >
+                About Me
+              </Typography>
+            </SmoothScrollReveal>
 
-            <Divider sx={{ mb: 6 }} />
+            <SmoothScrollReveal delay={0.4}>
+              <Divider
+                sx={{
+                  mb: 6,
+                  mx: 'auto',
+                  width: '80px',
+                  height: '4px',
+                  borderRadius: '2px',
+                  bgcolor: 'primary.main',
+                }}
+              />
+            </SmoothScrollReveal>
 
             <Grid container spacing={6}>
               {/* Personal Info Section */}
               <Grid item md={4} xs={12}>
-                <MotionPaper
-                  animate={{ opacity: 1, y: 0 }}
-                  elevation={0}
-                  initial={{ opacity: 0, y: 20 }}
-                  sx={{
-                    '&:hover': {
-                      boxShadow: theme.shadows[4],
-                      transform: 'translateY(-8px)',
-                    },
-                    alignItems: 'center',
-                    borderRadius: 2,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    p: 4,
-                    transition: 'all 0.3s ease-in-out',
-                  }}
-                  transition={{ duration: 0.5 }}
-                >
-                  {/* <Avatar
-                    alt={profile.name}
-                    src="/avatar.jpg"
+                <SmoothScrollReveal delay={0.6} direction="left">
+                  <MotionPaper
+                    elevation={0}
                     sx={{
                       '&:hover': {
-                        transform: 'scale(1.05)',
+                        boxShadow: `0 20px 40px ${alpha(theme.palette.primary.main, 0.15)}`,
+                        transform: 'translateY(-8px)',
                       },
-                      height: 200,
-                      mb: 3,
-                      transition: 'transform 0.3s ease-in-out',
-                      width: 200,
-                    }}
-                  /> */}
-                  <Box
-                    sx={{
-                      mt: 4,
-                      mb: 6,
-                      width: '100%',
+                      alignItems: 'center',
+                      background: `linear-gradient(135deg, 
+                        ${alpha(theme.palette.background.paper, 0.95)} 0%, 
+                        ${alpha(theme.palette.primary.main, 0.05)} 100%
+                      )`,
+                      backdropFilter: 'blur(20px)',
+                      border: '1px solid',
+                      borderColor: alpha(theme.palette.primary.main, 0.2),
+                      borderRadius: 3,
                       display: 'flex',
                       flexDirection: 'column',
-                      alignItems: 'center',
+                      p: 4,
+                      transition: 'all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
                     }}
+                    whileHover={{ scale: 1.02 }}
                   >
-                    <img
-                      src="/ai-business-card.png"
-                      alt="AI Business Card"
-                      style={{
-                        maxHeight: '300px',
-                        borderRadius: 8,
-                        boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
-                        margin: '0 auto',
-                        display: 'block',
+                    <Box
+                      sx={{
+                        mt: 4,
+                        mb: 6,
+                        width: '100%',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
                       }}
-                    />
-                  </Box>
-                  <Typography gutterBottom variant="h5">
-                    {profile.name}
-                  </Typography>
-                  <Typography color="text.secondary" gutterBottom variant="subtitle1">
-                    Software Engineer in Tokyo
-                  </Typography>
-                  <Typography sx={{ mt: 2 }} textAlign="center" variant="body2">
-                    A tech enthusiast from Taiwan, embracing new adventures in Japan
-                  </Typography>
-                  {/* Business Card Preview */}
-                </MotionPaper>
+                    >
+                      <img
+                        src="/ai-business-card.png"
+                        alt="AI Business Card"
+                        style={{
+                          maxHeight: '300px',
+                          borderRadius: 8,
+                          boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
+                          margin: '0 auto',
+                          display: 'block',
+                        }}
+                      />
+                    </Box>
+                    <Typography gutterBottom variant="h5">
+                      {profile.name}
+                    </Typography>
+                    <Typography color="text.secondary" gutterBottom variant="subtitle1">
+                      Software Engineer in Tokyo
+                    </Typography>
+                    <Typography sx={{ mt: 2 }} textAlign="center" variant="body2">
+                      A tech enthusiast from Taiwan, embracing new adventures in Japan
+                    </Typography>
+                  </MotionPaper>
+                </SmoothScrollReveal>
               </Grid>
 
               {/* Main Content Section */}
               <Grid item md={8} xs={12}>
                 {/* Programming Journey */}
-                <Accordion
-                  expanded={expanded === 'journey'}
-                  onChange={handleChange('journey')}
-                  sx={{
-                    '&:before': { display: 'none' },
-                    '&:not([aria-expanded="true"]):hover': {
-                      bgcolor: 'background.paper',
-                      transform: 'translateX(8px)',
-                    },
-                    borderRadius: '8px !important',
-                    mb: 2,
-                    transition: 'all 0.3s ease-in-out',
-                  }}
-                >
-                  <AccordionSummary expandIcon={<ExpandMore />}>
-                    <Box sx={{ alignItems: 'center', display: 'flex' }}>
-                      <Code color="primary" sx={{ mr: 2 }} />
-                      <Typography color="primary" variant="h5">
-                        My Programming Journey
-                      </Typography>
-                    </Box>
-                  </AccordionSummary>
-                  <AccordionDetails>
+                <SmoothScrollReveal delay={0.8} direction="right">
+                  <AnimatedAccordion
+                    id="journey"
+                    expanded={expanded}
+                    onChange={handleChange}
+                    icon={<Code />}
+                    title="My Programming Journey"
+                  >
                     <Typography paragraph variant="body1">
                       My fascination with programming began in middle school when I first
                       encountered Scratch. That simple block-based programming language opened up a
@@ -149,33 +154,18 @@ export default function About() {
                       school, I dove deeper into algorithmic problem-solving, finding joy in the
                       logical challenges and the satisfaction of creating efficient solutions.
                     </Typography>
-                  </AccordionDetails>
-                </Accordion>
+                  </AnimatedAccordion>
+                </SmoothScrollReveal>
 
                 {/* Sports & Activities */}
-                <Accordion
-                  expanded={expanded === 'sports'}
-                  onChange={handleChange('sports')}
-                  sx={{
-                    '&:before': { display: 'none' },
-                    '&:not([aria-expanded="true"]):hover': {
-                      bgcolor: 'background.paper',
-                      transform: 'translateX(8px)',
-                    },
-                    borderRadius: '8px !important',
-                    mb: 2,
-                    transition: 'all 0.3s ease-in-out',
-                  }}
-                >
-                  <AccordionSummary expandIcon={<ExpandMore />}>
-                    <Box sx={{ alignItems: 'center', display: 'flex' }}>
-                      <SportsVolleyball color="primary" sx={{ mr: 2 }} />
-                      <Typography color="primary" variant="h5">
-                        Sports & Activities
-                      </Typography>
-                    </Box>
-                  </AccordionSummary>
-                  <AccordionDetails>
+                <SmoothScrollReveal delay={1.0} direction="right">
+                  <AnimatedAccordion
+                    id="sports"
+                    expanded={expanded}
+                    onChange={handleChange}
+                    icon={<SportsVolleyball />}
+                    title="Sports & Activities"
+                  >
                     <Typography paragraph variant="body1">
                       Volleyball has been my sporting passion since high school. What started as
                       casual games with friends evolved into a more serious commitment when I joined
@@ -189,33 +179,18 @@ export default function About() {
                       not just exercise but a way to connect with others and maintain a healthy
                       work-life balance.
                     </Typography>
-                  </AccordionDetails>
-                </Accordion>
+                  </AnimatedAccordion>
+                </SmoothScrollReveal>
 
                 {/* Japanese Culture & Life */}
-                <Accordion
-                  expanded={expanded === 'japan'}
-                  onChange={handleChange('japan')}
-                  sx={{
-                    '&:before': { display: 'none' },
-                    '&:not([aria-expanded="true"]):hover': {
-                      bgcolor: 'background.paper',
-                      transform: 'translateX(8px)',
-                    },
-                    borderRadius: '8px !important',
-                    mb: 2,
-                    transition: 'all 0.3s ease-in-out',
-                  }}
-                >
-                  <AccordionSummary expandIcon={<ExpandMore />}>
-                    <Box sx={{ alignItems: 'center', display: 'flex' }}>
-                      <Flight color="primary" sx={{ mr: 2 }} />
-                      <Typography color="primary" variant="h5">
-                        Life in Japan
-                      </Typography>
-                    </Box>
-                  </AccordionSummary>
-                  <AccordionDetails>
+                <SmoothScrollReveal delay={1.2} direction="right">
+                  <AnimatedAccordion
+                    id="japan"
+                    expanded={expanded}
+                    onChange={handleChange}
+                    icon={<Flight />}
+                    title="Life in Japan"
+                  >
                     <Typography paragraph variant="body1">
                       My connection with Japanese culture began long before moving here, through
                       anime, games, and J-pop during my childhood. This early exposure cultivated a
@@ -232,32 +207,18 @@ export default function About() {
                       been incredibly rewarding. I'm excited to continue exploring Japanese culture,
                       improving my language skills, and contributing to the local tech community.
                     </Typography>
-                  </AccordionDetails>
-                </Accordion>
+                  </AnimatedAccordion>
+                </SmoothScrollReveal>
 
                 {/* Goals & Aspirations */}
-                <Accordion
-                  expanded={expanded === 'goals'}
-                  onChange={handleChange('goals')}
-                  sx={{
-                    '&:before': { display: 'none' },
-                    '&:not([aria-expanded="true"]):hover': {
-                      bgcolor: 'background.paper',
-                      transform: 'translateX(8px)',
-                    },
-                    borderRadius: '8px !important',
-                    transition: 'all 0.3s ease-in-out',
-                  }}
-                >
-                  <AccordionSummary expandIcon={<ExpandMore />}>
-                    <Box sx={{ alignItems: 'center', display: 'flex' }}>
-                      <Celebration color="primary" sx={{ mr: 2 }} />
-                      <Typography color="primary" variant="h5">
-                        Goals & Aspirations
-                      </Typography>
-                    </Box>
-                  </AccordionSummary>
-                  <AccordionDetails>
+                <SmoothScrollReveal delay={1.4} direction="right">
+                  <AnimatedAccordion
+                    id="goals"
+                    expanded={expanded}
+                    onChange={handleChange}
+                    icon={<Celebration />}
+                    title="Goals & Aspirations"
+                  >
                     <Typography paragraph variant="body1">
                       As I establish my life in Japan, my goals extend beyond professional
                       development. I aim to create meaningful connections within both the tech
@@ -271,8 +232,8 @@ export default function About() {
                       exchange, I hope to make a positive impact in my new home while continuing to
                       grow both personally and professionally.
                     </Typography>
-                  </AccordionDetails>
-                </Accordion>
+                  </AnimatedAccordion>
+                </SmoothScrollReveal>
               </Grid>
             </Grid>
           </Box>

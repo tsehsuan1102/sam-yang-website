@@ -13,9 +13,14 @@ import {
   useMediaQuery, 
   useTheme 
 } from '@mui/material';
+import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+
+const MotionAppBar = motion(AppBar);
+const MotionBox = motion(Box);
+const MotionIconButton = motion(IconButton);
 
 interface NavLink {
   label: string;
@@ -37,9 +42,20 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ darkMode, toggleDarkMode }) => {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const router = useRouter();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const isScrolled = window.scrollY > 20;
+      setScrolled(isScrolled);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -72,89 +88,222 @@ const Header: React.FC<HeaderProps> = ({ darkMode, toggleDarkMode }) => {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar color="default" elevation={1} position="fixed" sx={{ backdropFilter: 'blur(20px)' }}>
+      <MotionAppBar 
+        animate={{
+          backgroundColor: scrolled 
+            ? (darkMode 
+                ? 'rgba(18, 18, 18, 0.9)' 
+                : 'rgba(255, 255, 255, 0.9)')
+            : (darkMode 
+                ? 'rgba(18, 18, 18, 0.95)' 
+                : 'rgba(255, 255, 255, 0.95)'),
+          boxShadow: scrolled 
+            ? `0 8px 32px ${darkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)'}` 
+            : `0 2px 12px ${darkMode ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.05)'}`,
+        }}
+        color="default" 
+        initial={false}
+        position="fixed" 
+        sx={{ 
+          backdropFilter: 'blur(20px)',
+          borderBottom: `1px solid ${theme.palette.divider}`,
+          WebkitBackdropFilter: 'blur(20px)',
+          color: theme.palette.text.primary,
+        }}
+        transition={{ duration: 0.3, ease: 'easeInOut' }}
+      >
         <Toolbar>
-          <Typography
-            component={Link}
-            href="/"
-            sx={{
-              color: 'text.primary',
-              flexGrow: 1,
-              fontWeight: 'bold',
-              textDecoration: 'none'
+          <MotionBox
+            animate={{
+              scale: scrolled ? 0.95 : 1,
             }}
-            variant="h6"
+            sx={{
+              flexGrow: 1,
+            }}
+            transition={{ duration: 0.3 }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.98 }}
           >
-            <span style={{ color: theme.palette.primary.main }}>Sam</span>Yang
-          </Typography>
+            <Typography
+              component={Link}
+              href="/"
+              sx={{
+                background: `linear-gradient(45deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
+                backgroundClip: 'text',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                fontWeight: 'bold',
+                fontSize: '1.5rem',
+                letterSpacing: '-0.02em',
+                textDecoration: 'none'
+              }}
+              variant="h6"
+            >
+              Sam.Yang
+            </Typography>
+          </MotionBox>
 
           {/* Desktop Navigation */}
           {!isMobile && (
-            <Box sx={{ alignItems: 'center', display: 'flex' }}>
-              {navLinks.map((link) => (
-                <Button
-                  color={router.pathname === link.path ? 'primary' : 'inherit'}
-                  component={Link}
-                  href={link.path}
-                  key={link.label}
-                  sx={{ mx: 1 }}
-                >
-                  {link.label}
-                </Button>
-              ))}
-            </Box>
+            <MotionBox 
+              animate={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, y: -10 }}
+              sx={{ alignItems: 'center', display: 'flex' }}
+              transition={{ delay: 0.2, duration: 0.5 }}
+            >
+              {navLinks.map((link, index) => {
+                const isActive = router.pathname === link.path;
+                return (
+                  <MotionBox
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.1 * index, duration: 0.3 }}
+                    key={link.label}
+                    whileHover={{ 
+                      scale: 1.05,
+                      y: -2 
+                    }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    <Button
+                      component={Link}
+                      href={link.path}
+                      sx={{ 
+                        mx: 1,
+                        position: 'relative',
+                        overflow: 'hidden',
+                        color: isActive ? theme.palette.primary.main : 'text.primary',
+                        fontWeight: isActive ? 600 : 400,
+                        '&::before': {
+                          content: '""',
+                          position: 'absolute',
+                          bottom: 0,
+                          left: '50%',
+                          width: isActive ? '100%' : '0%',
+                          height: '2px',
+                          background: `linear-gradient(45deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
+                          transform: 'translateX(-50%)',
+                          transition: 'width 0.3s ease-in-out'
+                        },
+                        '&:hover::before': {
+                          width: '100%'
+                        }
+                      }}
+                    >
+                      {link.label}
+                    </Button>
+                  </MotionBox>
+                );
+              })}
+            </MotionBox>
           )}
 
           {/* Social Links & Theme Toggle */}
-          <Box sx={{ alignItems: 'center', display: 'flex', ml: 2 }}>
-            {/* <IconButton
+          <MotionBox 
+            animate={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, x: 20 }}
+            sx={{ alignItems: 'center', display: 'flex', ml: 2 }}
+            transition={{ delay: 0.4, duration: 0.5 }}
+          >
+            <MotionIconButton
               color="inherit"
               aria-label="toggle theme"
               edge="end"
               onClick={toggleDarkMode}
-              sx={{ mr: 1 }}
+              sx={{ 
+                mr: 1,
+                background: `linear-gradient(45deg, ${theme.palette.primary.main}20, ${theme.palette.secondary.main}20)`,
+                backdropFilter: 'blur(10px)',
+                '&:hover': {
+                  background: `linear-gradient(45deg, ${theme.palette.primary.main}40, ${theme.palette.secondary.main}40)`,
+                }
+              }}
+              whileHover={{ 
+                scale: 1.1,
+                rotate: 180 
+              }}
+              whileTap={{ scale: 0.9 }}
             >
               {darkMode ? <Brightness7 /> : <Brightness4 />}
-            </IconButton> */}
-            <IconButton
-              aria-label="github profile"
-              color="inherit"
-              component="a"
-              edge="end"
-              href="https://github.com/tsehsuan1102"
-              rel="noopener noreferrer"
-              sx={{ mr: 1 }}
-              target="_blank"
+            </MotionIconButton>
+            <MotionBox
+              whileHover={{ 
+                scale: 1.1,
+                y: -2 
+              }}
+              whileTap={{ scale: 0.9 }}
             >
-              <GitHub />
-            </IconButton>
-            <IconButton
-              aria-label="linkedin profile"
-              color="inherit"
-              component="a"
-              edge="end"
-              href="https://www.linkedin.com/in/tse-hsuan-yang/"
-              rel="noopener noreferrer"
-              target="_blank"
+              <IconButton
+                aria-label="github profile"
+                color="inherit"
+                component="a"
+                edge="end"
+                href="https://github.com/tsehsuan1102"
+                rel="noopener noreferrer"
+                sx={{ 
+                  mr: 1,
+                  background: `linear-gradient(45deg, ${theme.palette.primary.main}10, ${theme.palette.secondary.main}10)`,
+                  backdropFilter: 'blur(10px)',
+                  '&:hover': {
+                    background: `linear-gradient(45deg, ${theme.palette.primary.main}30, ${theme.palette.secondary.main}30)`,
+                  }
+                }}
+                target="_blank"
+              >
+                <GitHub />
+              </IconButton>
+            </MotionBox>
+            <MotionBox
+              whileHover={{ 
+                scale: 1.1,
+                y: -2 
+              }}
+              whileTap={{ scale: 0.9 }}
             >
-              <LinkedIn />
-            </IconButton>
+              <IconButton
+                aria-label="linkedin profile"
+                color="inherit"
+                component="a"
+                edge="end"
+                href="https://www.linkedin.com/in/tse-hsuan-yang/"
+                rel="noopener noreferrer"
+                sx={{
+                  background: `linear-gradient(45deg, ${theme.palette.primary.main}10, ${theme.palette.secondary.main}10)`,
+                  backdropFilter: 'blur(10px)',
+                  '&:hover': {
+                    background: `linear-gradient(45deg, ${theme.palette.primary.main}30, ${theme.palette.secondary.main}30)`,
+                  }
+                }}
+                target="_blank"
+              >
+                <LinkedIn />
+              </IconButton>
+            </MotionBox>
 
             {/* Mobile Menu Button */}
             {isMobile && (
-              <IconButton
-                aria-label="open drawer"
-                color="inherit"
-                edge="end"
-                onClick={handleDrawerToggle}
-                sx={{ ml: 1 }}
+              <MotionBox
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
               >
-                <MenuIcon />
-              </IconButton>
+                <IconButton
+                  aria-label="open drawer"
+                  color="inherit"
+                  edge="end"
+                  onClick={handleDrawerToggle}
+                  sx={{ 
+                    ml: 1,
+                    background: `linear-gradient(45deg, ${theme.palette.primary.main}20, ${theme.palette.secondary.main}20)`,
+                    backdropFilter: 'blur(10px)',
+                  }}
+                >
+                  <MenuIcon />
+                </IconButton>
+              </MotionBox>
             )}
-          </Box>
+          </MotionBox>
         </Toolbar>
-      </AppBar>
+      </MotionAppBar>
 
       {/* Mobile Navigation Drawer */}
       <Box component="nav">

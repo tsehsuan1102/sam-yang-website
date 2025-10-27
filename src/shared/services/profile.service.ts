@@ -62,10 +62,17 @@ const profileData: Profile = {
   ],
   experience: [
     {
+      company: "Marvis Japan",
+      description:
+        "Developing AI automation agent applications and enterprise solutions. Building AI-powered systems to optimize business processes for B2B clients, including computer vision applications.",
+      period: "Jul 2025 – Present",
+      position: "AI Engineer",
+    },
+    {
       company: "株式会社 BeyondBrain",
       description:
         "Leading the development of Lumi, an AI-powered travel assistant. Built a modular multi-agent AI system for travel-related queries (hotels, flights, restaurants). Established agile workflows, improving product iteration and user engagement.",
-      period: "Mar 2024 – Present",
+      period: "Mar 2024 – Mar 2025",
       position: "Chief AI Officer & Full-Stack Engineer",
     },
     {
